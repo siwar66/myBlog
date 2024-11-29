@@ -1,0 +1,33 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block body %}
+    <h1>Gestion des utilisateurs</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Rôles</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles|join(', ') }}</td>
+                    <td>
+                        <a href="{{ path('admin_user_validate', { id: user.id }) }}" class="btn btn-success">Valider</a>
+                        <a href="{{ path('admin_user_deactivate', { id: user.id }) }}" class="btn btn-danger">Désactiver</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

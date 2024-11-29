@@ -1,0 +1,51 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center mb-4">Inscription</h1>
+            
+            {{ form_start(registrationForm, {'attr': {'class': 'g-3', 'enctype': 'multipart/form-data'}}) }}
+            
+            <div class="form-floating mb-3">
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                {{ form_label(registrationForm.email, 'Email') }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+            
+            <div class="form-floating mb-3">
+                {{ form_widget(registrationForm.firstName, {'attr': {'class': 'form-control', 'placeholder': 'Prénom'}}) }}
+                {{ form_label(registrationForm.firstName, 'Prénom') }}
+                {{ form_errors(registrationForm.firstName) }}
+            </div>
+            
+            <div class="form-floating mb-3">
+                {{ form_widget(registrationForm.lastName, {'attr': {'class': 'form-control', 'placeholder': 'Nom'}}) }}
+                {{ form_label(registrationForm.lastName, 'Nom') }}
+                {{ form_errors(registrationForm.lastName) }}
+            </div>
+            
+            <div class="form-floating mb-3">
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}}) }}
+                {{ form_label(registrationForm.plainPassword, 'Mot de passe') }}
+                {{ form_errors(registrationForm.plainPassword) }}
+            </div>
+            
+            <div class="form-check mb-4">
+                {{ form_widget(registrationForm.agreeTerms) }}
+                {{ form_label(registrationForm.agreeTerms, 'J\'accepte les termes') }}
+                {{ form_errors(registrationForm.agreeTerms) }}
+            </div>
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">S'inscrire</button>
+            </div>
+            
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

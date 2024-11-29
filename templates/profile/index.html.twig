@@ -1,0 +1,61 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+<!-- Page Header Start -->
+
+<!-- Page Header End -->
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <h3 class="mb-4">Photo de profil</h3>
+            {% if app.user.profilePicture %}
+                <img 
+                    src="{{ asset('uploads/profile_pictures/' ~ app.user.profilePicture) }}" 
+                    alt="Photo de profil" 
+                    class="rounded-circle border" 
+                    style="width: 150px; height: 150px; object-fit: cover;">
+            {% else %}
+                <img 
+                    src="{{ asset('uploads/profile_pictures/default-profile.png') }}" 
+                    alt="Photo de profil par défaut" 
+                    class="rounded-circle border" 
+                    style="width: 150px; height: 150px; object-fit: cover;">
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h3 class="mb-4">Mes informations</h3>
+            
+            {% if app.flashes('success') %}
+                <div class="alert alert-success">
+                    {% for message in app.flashes('success') %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {{ form_start(form) }}
+                <div class="form-floating mb-3">
+                    {{ form_widget(form.firstName, {'attr': {'class': 'form-control', 'placeholder': 'Prénom'}}) }}
+                    {{ form_label(form.firstName, 'Prénom') }}
+                </div>
+                <div class="form-floating mb-3">
+                    {{ form_widget(form.lastName, {'attr': {'class': 'form-control', 'placeholder': 'Nom'}}) }}
+                    {{ form_label(form.lastName, 'Nom') }}
+                </div>
+                <div class="form-floating mb-3">
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                    {{ form_label(form.email, 'Email') }}
+                </div>
+                <div class="mb-3">
+                    {{ form_widget(form.profilePicture, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_label(form.profilePicture, 'Photo de profil') }}
+                </div>
+                <button type="submit" class="btn btn-primary">Mettre à jour</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

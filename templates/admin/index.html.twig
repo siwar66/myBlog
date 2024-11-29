@@ -1,0 +1,63 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Dashboard - Administration{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">Tableau de bord</h1>
+    
+    <!-- Gestion des articles -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Gestion des articles</h6>
+                </div>
+                <div class="card-body">
+                    <a href="{{ path('app_post_new') }}" class="btn btn-success btn-sm mb-2">Ajouter un article</a>
+                    <a href="{{ path('app_post_index') }}" class="btn btn-primary btn-sm mb-2">Voir tous les articles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gestion des utilisateurs -->
+        <div class="col-md-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Gestion des utilisateurs</h6>
+                </div>
+                <div class="card-body">
+                    <a href="{{ path('admin_user_list') }}" class="btn btn-primary btn-sm mb-2">Liste des utilisateurs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gestion des commentaires -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Gestion des commentaires</h6>
+                </div>
+                <div class="card-body">
+                    <a href="{{ path('app_comment_index') }}" class="btn btn-primary btn-sm mb-2">Voir tous les commentaires</a>
+                    <a href="{{ path('app_comment_new') }}" class="btn btn-danger btn-sm mb-2">Gérer les commentaires</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Autres statistiques -->
+        <div class="col-md-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Statistiques générales</h6>
+                </div>
+                <div class="card-body">
+                    <p>Ajoutez des graphiques ou des indicateurs ici...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

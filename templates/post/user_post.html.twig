@@ -1,0 +1,64 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">{{ post.title }}</h2>
+
+    <div class="card shadow-sm mb-4">
+        {% if post.picture %}
+            <img src="{{ asset('uploads/profile_pictures/' ~ post.picture) }}" class="card-img-top" alt="{{ post.title }}">
+        {% else %}
+            <img src="{{ asset('front/img/article-placeholder.jpg') }}" class="card-img-top" alt="Image par défaut">
+        {% endif %}
+        
+        <div class="card-body">
+            <h4 class="card-title">{{ post.title }}</h4>
+            <p class="card-text">{{ post.content }}</p>
+            <p class="text-muted"><small>Publié le {{ post.publishedAt|date('d/m/Y H:i') }}</small></p>
+        </div>
+    </div>
+
+    <!-- Section des commentaires -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Commentaires</h4>
+            {% if post.comments|length > 0 %}
+                <ul class="list-group list-group-flush">
+                    {% for comment in post.comments %}
+                        <li class="list-group-item">
+                            <strong>{{ comment.user.email }}</strong> - 
+                            <small class="text-muted">{{ comment.createdAt|date('d/m/Y H:i') }}</small>
+                            <p class="mb-0">{{ comment.content }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucun commentaire pour le moment.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Formulaire d'ajout de commentaire -->
+    {% if is_granted('ROLE_USER') %}
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title">Ajouter un commentaire</h4>
+                {{ form_start(commentForm) }}
+                    {{ form_row(commentForm.content, {'attr': {'class': 'form-control', 'rows': 4, 'placeholder': 'Écrivez votre commentaire ici...'}}) }}
+                    <button type="submit" class="btn btn-primary mt-3">Envoyer</button>
+                {{ form_end(commentForm) }}
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-warning mt-4">
+            Vous devez être <a href="{{ path('app_login') }}">connecté</a> pour ajouter un commentaire.
+        </div>
+    {% endif %}
+
+    <div class="mt-4 text-center">
+        <a href="{{ path('app_blog_home') }}" class="btn btn-secondary">Retour aux articles</a>
+    </div>
+</div>
+{% endblock %}
